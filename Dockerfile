@@ -20,6 +20,8 @@ FROM alpine:latest
 WORKDIR /app
 
 COPY --from=builder /app/app .
+COPY --from=builder /app/static/ ./static
+
 
 COPY .env .
 
