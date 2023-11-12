@@ -1,0 +1,11 @@
+version: "3"
+services:
+  storage: 
+    image: duchoang206h/file-storage
+    ports:
+      - 4000:4000
+    restart: always
+    volumes:
+      - storage-data:/static/
+volumes:
+  storage-data:
