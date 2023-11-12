@@ -1,0 +1,22 @@
+name: Publish image
+
+on:
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: env
+      run: |
+        echo FILE_HOST=${{ secrets.FILE_HOST }} >> .env
+    - name: build
+      run: docker build . -t duchoang206h/file-storage
+    - name: publish
+      run: |
+        docker login -u ${{secrets.DOCKER_USER }} -p ${{secrets.DOCKER_TOKEN }}
+        docker push duchoang206h/file-storage:latest
